@@ -1,0 +1,80 @@
+<!-- 
+  File: android/app/src/main/AndroidManifest.xml
+  Required Android Permissions for Bluetooth Classic (SPP) & Microphone Speech-To-Text
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.esp32_voice_controller">
+
+    <!-- =================================================================== -->
+    <!-- 1. AUDIO RECORDING PERMISSIONS (For Speech-to-Text)                 -->
+    <!-- =================================================================== -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    <!-- =================================================================== -->
+    <!-- 2. BLUETOOTH PERMISSIONS FOR ANDROID 12+ (API Level 31+)            -->
+    <!-- =================================================================== -->
+    <!-- Required to connect to paired Bluetooth devices (ESP32)             -->
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+
+    <!-- Required to discover nearby Bluetooth devices.                      -->
+    <!-- android:usesPermissionFlags="neverForLocation" states that your app -->
+    <!-- does not derive physical location from Bluetooth scans.             -->
+    <uses-permission 
+        android:name="android.permission.BLUETOOTH_SCAN"
+        android:usesPermissionFlags="neverForLocation"
+        tools:targetApi="s" />
+
+    <!-- =================================================================== -->
+    <!-- 3. LEGACY BLUETOOTH PERMISSIONS (For Android 11 / API 30 and below) -->
+    <!-- =================================================================== -->
+    <uses-permission 
+        android:name="android.permission.BLUETOOTH" 
+        android:maxSdkVersion="30" />
+    <uses-permission 
+        android:name="android.permission.BLUETOOTH_ADMIN" 
+        android:maxSdkVersion="30" />
+
+    <!-- Required on Android 6 to 11 to scan for Bluetooth devices           -->
+    <uses-permission 
+        android:name="android.permission.ACCESS_FINE_LOCATION" 
+        android:maxSdkVersion="30" />
+    <uses-permission 
+        android:name="android.permission.ACCESS_COARSE_LOCATION" 
+        android:maxSdkVersion="30" />
+
+    <!-- Declare that Bluetooth hardware is required on the smartphone       -->
+    <uses-feature 
+        android:name="android.hardware.bluetooth" 
+        android:required="true" />
+    <uses-feature 
+        android:name="android.hardware.microphone" 
+        android:required="true" />
+
+    <application
+        android:label="ESP32 Voice Bridge"
+        android:name="${applicationName}"
+        android:icon="@mipmap/ic_launcher">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:theme="@style/LaunchTheme"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize">
+            
+            <meta-data
+              android:name="io.flutter.embedding.android.NormalTheme"
+              android:resource="@style/NormalTheme" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        
+        <meta-data
+            android:name="flutterEmbedding"
+            android:value="2" />
+    </application>
+</manifest>

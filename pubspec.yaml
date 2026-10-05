@@ -1,0 +1,31 @@
+name: esp32_voice_controller
+description: "A production Flutter application connecting ESP32 via Bluetooth Serial with real-time Speech-To-Text (STT) transmission."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Bluetooth Classic (RFCOMM / SPP) connection library for ESP32
+  flutter_bluetooth_serial: ^0.4.0
+
+  # Speech-To-Text engine capturing audio and converting using Google STT
+  speech_to_text: ^7.0.0
+
+  # Runtime permissions management for Android 12+ (API 31+) & Microphone
+  permission_handler: ^11.3.1
+
+  # Cupertion icons for standard iOS/Material styling
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
